@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bienvenido</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:linear-gradient(135deg,#0F4C81,#3B82F6,#93C5FD);
+    overflow:hidden;
+}
+
+.card{
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:25px;
+    padding:45px;
+    width:360px;
+    text-align:center;
+    color:white;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+    animation:entrada 1s ease;
+}
+
+@keyframes entrada{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+h1{
+    font-size:2.3rem;
+    margin-bottom:10px;
+}
+
+p{
+    font-size:1.2rem;
+    margin-bottom:30px;
+    opacity:.95;
+}
+
+button{
+    padding:15px 40px;
+    border:none;
+    border-radius:50px;
+    background:white;
+    color:#1565C0;
+    font-size:1rem;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-3px) scale(1.05);
+    background:#E3F2FD;
+    box-shadow:0 10px 20px rgba(0,0,0,.25);
+}
+
+#mensaje{
+    margin-top:30px;
+    min-height:35px;
+    font-size:1.2rem;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.corazon{
+    position:fixed;
+    font-size:24px;
+    animation:subir 3s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes subir{
+    0%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+    100%{
+        opacity:0;
+        transform:translateY(-250px) scale(1.8);
+    }
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+    <h1>Hola</h1>
+    <p>Bienvenido</p>
+
+    <button id="btn" onclick="accion()">Continuar</button>
+
+    <div id="mensaje"></div>
+</div>
+
+<script>
+let paso = 0;
+
+function accion(){
+
+    const mensaje = document.getElementById("mensaje");
+    const boton = document.getElementById("btn");
+
+    if(paso === 0){
+
+        mensaje.innerHTML = "💙 Te amo bro, gracias por estar aquí.";
+        boton.textContent = "Continuar";
+
+        for(let i=0;i<15;i++){
+            crearCorazon();
+        }
+
+        paso++;
+
+    }else{
+
+        mensaje.innerHTML = "Ya vete we.";
+        boton.textContent = "Fin";
+        boton.disabled = true;
+        boton.style.opacity = ".7";
+        boton.style.cursor = "default";
+
+    }
+}
+
+function crearCorazon(){
+
+    const corazon = document.createElement("div");
+    corazon.className = "corazon";
+    corazon.innerHTML = "💙";
+
+    corazon.style.left = Math.random()*100 + "vw";
+    corazon.style.bottom = "-30px";
+    corazon.style.fontSize = (20 + Math.random()*25) + "px";
+
+    document.body.appendChild(corazon);
+
+    setTimeout(()=>{
+        corazon.remove();
+    },3000);
+
+}
+</script>
+
+</body>
+</html>
